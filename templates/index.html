@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Healthcare Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(to right, #e0f7fa, #80deea);
+            background-size: cover;
+            background-position: center;
+            font-family: 'Arial', sans-serif;
+            color: #333;
+        }
+        .container {
+            margin-top: 50px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+            border-radius: 10px;
+            padding: 20px;
+        }
+        h1 {
+            color: #2a3d4c;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 36px;
+            font-weight: bold;
+        }
+        h4 {
+            color: #2a3d4c;
+            margin-bottom: 20px;
+        }
+        h5 {
+            color: #00796b;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .checkbox-label {
+            margin: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-label i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        .checkbox-label input {
+            margin-right: 10px;
+        }
+        .card {
+            transition: transform 0.3s;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .result {
+            margin-top: 30px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .alert {
+            margin-top: 20px;
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        .btn-group {
+            margin: 20px 0;
+        }
+        .btn-primary {
+            background-color: #00796b;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-primary:hover {
+            background-color: #004d40;
+        }
+        .collapse {
+            margin-top: 15px;
+        }
+        .collapse button {
+            margin-top: 10px;
+        }
+        .btn-info {
+            background-color: #26a69a;
+            border: none;
+            transition: background-color 0.3s;
+        }
+        .btn-info:hover {
+            background-color: #00796b;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .checkbox-group .checkbox-label {
+            width: 45%;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Intelligent Healthcare Assistant</h1>
+    <div class="card">
+        <form method="POST" action="/predict">
+            <h4>Select Your Symptoms:</h4>
+
+            <!-- General Symptoms -->
+            <h5>General Symptoms:</h5>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label"><i class="fas fa-thermometer-half"></i><input type="checkbox" name="symptoms" value="mild_fever"> Mild Fever</label>
+                <label class="checkbox-label"><i class="fas fa-head-side-virus"></i><input type="checkbox" name="symptoms" value="headache"> Headache</label>
+                <label class="checkbox-label"><i class="fas fa-solid fa-pills"></i><input type="checkbox" name="symptoms" value="continuous_sneezing"> Continuous Sneezing</label>
+                <label class="checkbox-label"><i class="fas fa-fire"></i><input type="checkbox" name="symptoms" value="high_fever"> High Fever</label>
+            </div>
+
+            <!-- Skin Symptoms -->
+            <h5>Skin Symptoms:</h5>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label"><i class="fas fa-bacteria"></i><input type="checkbox" name="symptoms" value="itching"> Itching</label>
+                <label class="checkbox-label"><i class="fas fa-paint-brush"></i><input type="checkbox" name="symptoms" value="skin_rash"> Skin Rash</label>
+                <label class="checkbox-label"><i class="fas fa-solid fa-vial"></i><input type="checkbox" name="symptoms" value="pus_filled_pimples"> Pimples</label>
+                <label class="checkbox-label"><i class="fas fa-solid fa-shield-virus"></i><input type="checkbox" name="symptoms" value="skin_peeling"> Skin Peeling</label>
+            </div>
+
+            <!-- Digestive Symptoms -->
+            <h5>Digestive Symptoms:</h5>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label"><i class="fas fa-wine-glass-alt"></i><input type="checkbox" name="symptoms" value="acidity"> Acidity</label>
+                <label class="checkbox-label"><i class="fas fa-solid fa-pills"></i><input type="checkbox" name="symptoms" value="vomiting"> Vomiting</label>
+                <label class="checkbox-label"><i class="fas fa-utensils"></i><input type="checkbox" name="symptoms" value="indigestion"> Indigestion</label>
+                <label class="checkbox-label"><i class="fas fa-toilet"></i><input type="checkbox" name="symptoms" value="constipation"> Constipation</label>
+                <label class="checkbox-label"><i class="fas fa-cogs"></i><input type="checkbox" name="symptoms" value="stomach_pain"> Stomach Pain</label>
+            </div>
+
+            <!-- Respiratory Symptoms -->
+            <h5>Respiratory Symptoms:</h5>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label"><i class="fas fa-regular fa-head-side-cough"></i><input type="checkbox" name="symptoms" value="cough"> Cough</label>
+                <label class="checkbox-label"><i class="fas fa-solid fa-lungs"></i><input type="checkbox" name="symptoms" value="breathlessness"> Breathlessness</label>
+                <label class="checkbox-label"><i class="fas fa-gas-pump"></i><input type="checkbox" name="symptoms" value="throat_irritation"> Throat Irritation</label>
+                <label class="checkbox-label"><i class="fas fa-tint"></i><input type="checkbox" name="symptoms" value="runny_nose"> Runny Nose</label>
+            </div>
+
+            <!-- Muscular Symptoms -->
+            <h5>Muscular Symptoms:</h5>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label"><i class="fas fa-radiation-alt"></i><input type="checkbox" name="symptoms" value="back_pain"> Back Pain</label>
+                <label class="checkbox-label"><i class="fas fa-spell-check"></i><input type="checkbox" name="symptoms" value="neck_pain"> Neck Pain</label>
+                <label class="checkbox-label"><i class="fas fa-bone"></i><input type="checkbox" name="symptoms" value="knee_pain"> Knee Pain</label>
+                <label class="checkbox-label"><i class="fas fa-biking"></i><input type="checkbox" name="symptoms" value="joint_pain"> Joint Pain</label>
+                <label class="checkbox-label"><i class="fas fa-atom"></i><input type="checkbox" name="symptoms" value="muscle_pain"> Muscle Pain</label>
+            </div>
+
+            <!-- Psychological Symptoms -->
+            <!-- <h5>Psychological Symptoms:</h5>
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label"><i class="fas fa-sad-tear"></i><input type="checkbox" name="symptoms" value="depression"> Depression</label>
+                <label class="checkbox-label"><i class="fas fa-head-side-virus"></i><input type="checkbox" name="symptoms" value="anxiety"> Anxiety</label>
+                <label class="checkbox-label"><i class="fas fa-brain"></i><input type="checkbox" name="symptoms" value="confusion"> Confusion</label>
+                <label class="checkbox-label"><i class="fas fa-exclamation-circle"></i><input type="checkbox" name="symptoms" value="mood_swings"> Mood Swings</label>
+            </div> -->
+
+            <div class="btn-group mb-4">
+                <button type="submit" class="btn btn-primary mx-2" name="prediction_type" value="single">Predict Single Disease</button>
+                <button type="submit" class="btn btn-primary mx-2" name="prediction_type" value="multiple">Predict Multiple Diseases</button>
+            </div>
+        </form>
+    </div> 
+    {% if message %}
+    <div class="alert alert-danger">{{ message }}</div>
+    {% endif %}
+
+{% if predicted_diseases %}
+    <div class="result">
+        {% if selected_symptoms %}
+            <h4>Selected Symptoms:</h4>
+            <ul>
+                {% for symptom in selected_symptoms %}
+                <li>{{ symptom|replace('_', ' ')|capitalize }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+
+
+        <h4>Predicted Diseases:</h4>
+        <ul>
+            {% for disease in predicted_diseases %}
+                <li>
+                    {{ disease }}
+                    <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#details-{{ disease | replace(' ', '-') }}" aria-expanded="false" aria-controls="details-{{ disease | replace(' ', '-') }}">
+                        View Details
+                    </button>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% for disease, details in predicted_diseases.items() %}
+            <div class="collapse" id="details-{{ disease | replace(' ', '-') }}">
+                <h5>Details for {{ disease }}:</h5>
+                <p><strong>Description:</strong> {{ details.description }}</p>
+
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#precautions-{{ disease | replace(' ', '-') }}" aria-expanded="false" aria-controls="precautions-{{ disease | replace(' ', '-') }}">
+                    Precautions
+                </button>
+                <div class="collapse" id="precautions-{{ disease | replace(' ', '-') }}">
+                    <ul>
+                        {% for precaution in details.precautions %}
+                            <li>{{ precaution }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#medications-{{ disease | replace(' ', '-') }}" aria-expanded="false" aria-controls="medications-{{ disease | replace(' ', '-') }}">
+                    Consultaion
+                </button>
+                <div class="collapse" id="medications-{{ disease | replace(' ', '-') }}">
+                    <ul>
+                        {% for medication in details.medications %}
+                            <li>{{ medication }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#diet-{{ disease | replace(' ', '-') }}" aria-expanded="false" aria-controls="diet-{{ disease | replace(' ', '-') }}">
+                    Recommended Diet
+                </button>
+                <div class="collapse" id="diet-{{ disease | replace(' ', '-') }}">
+                    <ul>
+                        {% for item in details.diet %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#workout-{{ disease | replace(' ', '-') }}" aria-expanded="false" aria-controls="workout-{{ disease | replace(' ', '-') }}">
+                    Suggested Workouts
+                </button>
+                <div class="collapse" id="workout-{{ disease | replace(' ', '-') }}">
+                    <ul>
+                        {% for workout in details.workout %}
+                            <li>{{ workout }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <hr>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
